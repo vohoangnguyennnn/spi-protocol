@@ -112,6 +112,7 @@ module spi_master #(
                 busy <= 1'b0;
                 done <= 1'b1;
                 cs_n <= 1'b1;
+                mosi <= 1'b0;
                 finish_pending <= 1'b0;
             end else if (div_cnt == DIV_LIMIT_VALUE[DIV_CNT_WIDTH-1:0]) begin
                 div_cnt <= {DIV_CNT_WIDTH{1'b0}};
@@ -153,7 +154,6 @@ module spi_master #(
 
                         if (bit_cnt == LAST_BIT_VALUE[BIT_CNT_WIDTH-1:0]) begin
                             rx_data <= sampled_word;
-                            mosi <= 1'b0;
                             finish_pending <= 1'b1;
                         end else begin
                             bit_cnt <= bit_cnt + 1'b1;
